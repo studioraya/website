@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Raya - AI Consultancy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F9FA;
+            --bg-tertiary: #F0F2F5;
+            --text-primary: #333333;
+            --text-secondary: #6C757D;
+            --accent: #1E88E5;
+            --accent-hover: #1976D2;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --danger: #F44336;
+            --border: #DEE2E6;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --animation-duration: 0.8s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 6rem 0;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-hover);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            letter-spacing: 0.025rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            color: white;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            background-color: rgba(30, 136, 229, 0.1);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, var(--accent), #00B4D8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            color: var(--accent);
+        }
+        
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 10rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 136, 229, 0.05), rgba(0, 180, 216, 0.08));
+            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 1.5rem;
+            position: relative;
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+        
+        .stat-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--accent);
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+        
+        .stat-item h3 span {
+            background: linear-gradient(90deg, var(--accent), #00B4D8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-item p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: var(--bg-secondary);
+            position: relative;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(30, 136, 229, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .feature-card a {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .feature-card a i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card a:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Solutions Section */
+        .solutions {
+            position: relative;
+            background-color: var(--bg-primary);
+        }
+        
+        .solutions-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .tab-btn::after {
+            content: "";
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .tab-btn.active::after {
+            transform: scaleX(1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .solution-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .solution-text {
+            flex: 1;
+            min-width: 280px;
+        }
+        
+        .solution-image {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+        }
+        
+        .solution-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        
+        .solution-features {
+            margin-top: 1.5rem;
+        }
+        
+        .solution-feature {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .solution-feature i {
+            color: var(--accent);
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Partners Section */
+        .partners {
+            background-color: var(--bg-secondary);
+            position: relative;
+            padding: 5rem 0;
+        }
+        
+        .partners-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .partner-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+        
+        .partner-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+        
+        .partner-item img {
+            max-width: 100%;
+            max-height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-item:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* Contact Form */
+        .contact {
+            background-color: var(--bg-primary);
+            position: relative;
+        }
+        
+        .contact-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .form-header h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .form-full {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .footer-about p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .footer-col h4 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            color: var(--text-primary);
+        }
+        
+        .footer-col h4::after {
+            content: "";
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a, .footer-links p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .social-links {
+            display: flex;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-tertiary);
+            border-radius: 50%;
+            margin-left: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent);
+        }
+        
+        .social-link i {
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .social-link:hover i {
+            color: white;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: var(--bg-primary);
+            z-index: 2000;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            box-shadow: -5px 0 15px var(--shadow);
+        }
+        
+        .mobile-nav.active {
+            right: 0;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav-list {
+            list-style: none;
+            margin-top: 3rem;
+        }
+        
+        .mobile-nav-list li {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mobile-nav-list a {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 500;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-nav-list a:hover {
+            color: var(--accent);
+        }
+        
+        .mobile-nav-cta {
+            margin-top: 2rem;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Trusted By Section */
+        .trusted-by {
+            padding: 2rem 0;
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .trusted-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .trusted-title h4 {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .trusted-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .trusted-logo {
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        
+        .trusted-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .trusted-logo img {
+            max-height: 40px;
+            object-fit: contain;
+        }
+        
+        /* Scroll-based Animations */
+        .reveal-left, .reveal-right, .reveal-up, .reveal-down, .reveal-fade {
+            opacity: 0;
+            transition: all var(--animation-duration) ease;
+        }
+        
+        .reveal-left {
+            transform: translateX(-50px);
+        }
+        
+        .reveal-right {
+            transform: translateX(50px);
+        }
+        
+        .reveal-up {
+            transform: translateY(50px);
+        }
+        
+        .reveal-down {
+            transform: translateY(-50px);
+        }
+        
+        .reveal-fade {
+            opacity: 0;
+        }
+        
+        .reveal-left.active, .reveal-right.active, .reveal-up.active, .reveal-down.active, .reveal-fade.active {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+        
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+        
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+        
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+        
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+        
+        .reveal-delay-5 {
+            transition-delay: 0.5s;
+        }
+        
+        .reveal-delay-6 {
+            transition-delay: 0.6s;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-form-container {
+                padding: 2rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .hero {
+                padding: 8rem 0 4rem;
+            }
+            
+            .stat-item h3 {
+                font-size: 2.5rem;
+            }
+            
+            .solutions-tabs {
+                justify-content: flex-start;
+                padding-bottom: 1rem;
+            }
+            
+            .tab-btn {
+                padding: 0.5rem 1rem;
+            }
+            
+            .partners-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .social-links {
+                margin-top: 1rem;
+            }
+            
+            .social-link:first-child {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Studio <span>Raya</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#features">Diensten</a></li>
+                    <li><a href="#solutions">Oplossingen</a></li>
+                    <li><a href="#partners">Klanten</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="overlay"></div>
+    <div class="mobile-nav">
+        <button class="close-menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-list">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#features">Diensten</a></li>
+            <li><a href="#solutions">Oplossingen</a></li>
+            <li><a href="#partners">Klanten</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-nav-cta">
+            <a href="#contact" class="btn btn-lg">Neem contact op</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container hero-content">
+            <div class="badge">AI Consultancy</div>
+            <h1>Versterk uw organisatie met <span class="text-gradient">AI-oplossingen op maat</span></h1>
+            <p>Studio Raya helpt organisaties de kracht van kunstmatige intelligentie te benutten om efficiëntie te verbeteren, processen te stroomlijnen en medewerkerstevredenheid te verhogen door middel van aangepaste AI-implementaties.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-lg">Neem contact op</a>
+                <a href="#features" class="btn btn-outline btn-lg">Meer informatie</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trusted By Section -->
+    <section class="trusted-by">
+        <div class="container">
+            <div class="trusted-title">
+                <h4>Vertrouwd door toonaangevende bedrijven</h4>
+            </div>
+            <div class="trusted-logos">
+                <div class="trusted-logo reveal-left">
+                    <img src="/api/placeholder/120/50" alt="Philips" />
+                </div>
+                <div class="trusted-logo reveal-up">
+                    <img src="/api/placeholder/120/50" alt="Rabobank" />
+                </div>
+                <div class="trusted-logo reveal-up">
+                    <img src="/api/placeholder/120/50" alt="KLM" />
+                </div>
+                <div class="trusted-logo reveal-up">
+                    <img src="/api/placeholder/120/50" alt="ABN AMRO" />
+                </div>
+                <div class="trusted-logo reveal-right">
+                    <img src="/api/placeholder/120/50" alt="Unilever" />
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3><span>5000</span>+</h3>
+                    <p>integraties met huidige softwares mogelijk</p>
+                </div>
+                <div class="stat-item">
+                    <h3><span>70</span>%</h3>
+                    <p>tijdsbesparingen mogelijk (McKinsey, 2023)</p>
+                </div>
+                <div class="stat-item">
+                    <h3><span>270</span>%</h3>
+                    <p>groei bij bedrijven die investeren in AI (Gartner, 2023)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title reveal-fade">
+                <h2>Uitgebreide <span class="text-gradient">AI-diensten</span></h2>
+                <p>Wij bieden een compleet pakket aan AI-oplossingen die transformeren hoe uw organisatie functioneert</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>AI-kennissessie</h3>
+                    <p>Interactieve sessies ontworpen om teams kennis te laten maken met AI-concepten, tools en mogelijkheden. We bevorderen een fundamenteel begrip van AI's potentieel binnen uw branche en identificeren kansen voor uw organisatie.</p>
+                    <a href="#contact">Neem contact op <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>AI advies op maat</h3>
+                    <p>Samenwerkende workshops die de unieke uitdagingen en kansen van uw organisatie onderzoeken, resulterend in een aangepaste AI-strategie die aansluit bij uw strategische doelstellingen en behoeften.</p>
+                    <a href="#contact">Neem contact op <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>AI tools ontwikkeling en implementatie</h3>
+                    <p>End-to-end ontwikkeling en integratie van AI-oplossingen op maat voor uw organisatie, inclusief procesoptimalisatie, opleiding van uw medewerkers en naadloze integratie met bestaande systemen.</p>
+                    <a href="#contact">Neem contact op <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solutions Section -->
+    <section class="solutions" id="solutions">
+        <div class="container">
+            <div class="section-title reveal-fade">
+                <h2>AI-oplossingen voor <span class="text-gradient">Elke Behoefte</span></h2>
+                <p>Ontdek hoe onze AI-adviesdiensten specifieke uitdagingen in uw organisatie kunnen aanpakken</p>
+            </div>
+            <div class="solutions-tabs">
+                <button class="tab-btn active" data-tab="helpdesk">Helpdesk Automatisering</button>
+                <button class="tab-btn" data-tab="ecommerce">E-commerce Ondersteuning</button>
+                <button class="tab-btn" data-tab="leads">Lead Generatie</button>
+                <button class="tab-btn" data-tab="conversion">Conversie Optimalisatie</button>
+            </div>
+            
+            <div class="tab-content active" id="helpdesk">
+                <div class="solution-content">
+                    <div class="solution-text">
+                        <h3>Transformeer uw helpdesk met AI</h3>
+                        <p>Automatiseer routinematige ondersteuningsvragen en stel uw team in staat zich te concentreren op complexe problemen die een menselijke aanpak vereisen. Onze AI-helpdeskoplossingen kunnen tot 70% van de veelvoorkomende ondersteuningsvragen afhandelen.</p>
+                        <div class="solution-features">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>24/7 geautomatiseerde klantenondersteuning met natuurlijke taalverwerking</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Naadloze escalatie naar menselijke medewerkers voor complexe problemen</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Integratie met bestaande ticketsystemen en kennisbanken</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Continu leren van interacties om nauwkeurigheid te verbeteren</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="btn" style="margin-top: 2rem;">Neem contact op</a>
+                    </div>
+                    <div class="solution-image">
+                        <img src="/api/placeholder/450/300" alt="AI Helpdesk Oplossing" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="ecommerce">
+                <div class="solution-content">
+                    <div class="solution-text">
+                        <h3>Verbeter de e-commerce klantervaring</h3>
+                        <p>Bied gepersonaliseerde winkelassistentie, productaanbevelingen en directe ondersteuning aan uw online klanten. Onze AI-oplossingen helpen de waarde van winkelwagens en conversiepercentages te verhogen.</p>
+                        <div class="solution-features">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>AI-gestuurde productaanbevelingsengine</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Geautomatiseerde ordertracking en verzendstatusupdates</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Gepersonaliseerde winkelassistentie</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Integratie met populaire e-commerceplatforms</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="btn" style="margin-top: 2rem;">Neem contact op</a>
+                    </div>
+                    <div class="solution-image">
+                        <img src="/api/placeholder/450/300" alt="E-commerce AI-oplossing" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="leads">
+                <div class="solution-content">
+                    <div class="solution-text">
+                        <h3>Versnel leadgeneratie</h3>
+                        <p>Identificeer en benader potentiële klanten op schaal met AI-gestuurde leadgeneratie. Onze oplossingen helpen leads te kwalificeren, outreach te personaliseren en uw verkoopproces te stroomlijnen.</p>
+                        <div class="solution-features">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>AI-leadkwalificatie en -scoring</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Geautomatiseerde gepersonaliseerde outreachcampagnes</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Intelligente afsprakenplanning en follow-ups</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Integratie met uw CRM en verkooptools</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="btn" style="margin-top: 2rem;">Neem contact op</a>
+                    </div>
+                    <div class="solution-image">
+                        <img src="/api/placeholder/450/300" alt="Leadgeneratie AI-oplossing" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="conversion">
+                <div class="solution-content">
+                    <div class="solution-text">
+                        <h3>Optimaliseer conversies met AI</h3>
+                        <p>Zet meer bezoekers om in klanten met intelligente conversie-optimalisatie. Onze AI analyseert gebruikersgedrag en personaliseert de ervaring om conversiepercentages te maximaliseren.</p>
+                        <div class="solution-features">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>AI-gestuurde A/B-tests en optimalisatie</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Gepersonaliseerde gebruikerservaringen op basis van gedrag</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Intelligente exit-intent prompts en aanbevelingen</p>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Gedetailleerde analyses en conversie-inzichten</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="btn" style="margin-top: 2rem;">Neem contact op</a>
+                    </div>
+                    <div class="solution-image">
+                        <img src="/api/placeholder/450/300" alt="Conversie-optimalisatie AI-oplossing" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Partners Section -->
+    <section class="partners" id="partners">
+        <div class="container">
+            <div class="section-title reveal-fade">
+                <h2>Onze <span class="text-gradient">Klanten</span></h2>
+                <p>Organisaties die met ons samenwerken om hun AI-doelen te bereiken</p>
+            </div>
+            
+            <div class="partners-grid">
+                <div class="partner-item">
+                    <img src="/api/placeholder/120/60" alt="TechGrowth BV" />
+                </div>
+                <div class="partner-item">
+                    <img src="/api/placeholder/120/60" alt="DataFlow Nederland" />
+                </div>
+                <div class="partner-item">
+                    <img src="/api/placeholder/120/60" alt="EuroTech Solutions" />
+                </div>
+                <div class="partner-item">
+                    <img src="/api/placeholder/120/60" alt="InnovateNL" />
+                </div>
+                <div class="partner-item">
+                    <img src="/api/placeholder/120/60" alt="DigitalMind" />
+                </div>
+                <div class="partner-item">
+                    <img src="/api/placeholder/120/60" alt="FutureTech B.V." />
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title reveal-fade">
+                <h2>Neem <span class="text-gradient">Contact</span> Met Ons Op</h2>
+                <p>Vul het formulier in om een vrijblijvend gesprek te plannen met onze AI-experts</p>
+            </div>
+            
+            <div class="contact-form-container">
+                <div class="form-header">
+                    <h3>Vertel ons over uw AI-ambities</h3>
+                    <p>We nemen binnen 24 uur contact met u op om de mogelijkheden te bespreken</p>
+                </div>
+                
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Naam</label>
+                            <input type="text" id="name" placeholder="Uw volledige naam" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-mailadres</label>
+                            <input type="email" id="email" placeholder="uw.email@bedrijf.nl" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Telefoonnummer</label>
+                            <input type="tel" id="phone" placeholder="+31 6 12345678">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Bedrijfsnaam</label>
+                            <input type="text" id="company" placeholder="Uw bedrijf">
+                        </div>
+                        
+                        <div class="form-group form-full">
+                            <label for="interest">Waar bent u in geïnteresseerd?</label>
+                            <select id="interest" required>
+                                <option value="" selected disabled>Selecteer een optie</option>
+                                <option value="kennissessie">AI-kennissessie</option>
+                                <option value="advies">AI advies op maat</option>
+                                <option value="ontwikkeling">AI tools ontwikkeling en implementatie</option>
+                                <option value="other">Anders</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group form-full">
+                            <label for="message">Uw bericht (optioneel)</label>
+                            <textarea id="message" placeholder="Vertel ons meer over uw wensen en doelen..."></textarea>
+                        </div>
+                        
+                        <div class="form-group form-full">
+                            <button type="submit" class="btn btn-lg" style="width: 100%;">Verstuur Aanvraag</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">Studio <span>Raya</span></div>
+                    <p>Studio Raya is een vooruitstrevend AI-adviesbureau dat zich richt op het helpen van organisaties om de kracht van kunstmatige intelligentie te benutten voor het verbeteren van efficiëntie en verhogen van medewerkerstevredenheid.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Navigatie</h4>
+                    <ul class="footer-links">
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#features">Diensten</a></li>
+                        <li><a href="#solutions">Oplossingen</a></li>
+                        <li><a href="#partners">Klanten</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@studioraya.nl">info@studioraya.nl</a></li>
+                        <li><a href="tel:+31201234567">+31 20 123 4567</a></li>
+                        <li><p>Amsterdam, Nederland</p></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 Studio Raya. Alle rechten voorbehouden.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile Navigation
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenu = document.querySelector('.close-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const overlay = document.querySelector('.overlay');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-list a');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        function closeNavigation() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        closeMenu.addEventListener('click', closeNavigation);
+        overlay.addEventListener('click', closeNavigation);
+        
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', closeNavigation);
+        });
+        
+        // Solutions Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form Submission
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Bedankt voor uw aanvraag! We nemen zo spoedig mogelijk contact met u op.');
+            form.reset();
+        });
+        
+        // Scroll Animations
+        function checkScroll() {
+            const elements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up, .reveal-down, .reveal-fade');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementPosition < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                } else {
+                    element.classList.remove('active');
+                }
+            });
+        }
+        
+        // Add animation classes to elements
+        function addAnimationClasses() {
+            // Stats items
+            const statItems = document.querySelectorAll('.stat-item');
+            statItems.forEach((item, index) => {
+                item.classList.add('reveal-up');
+                item.classList.add(`reveal-delay-${index + 1}`);
+            });
+            
+            // Feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach((card, index) => {
+                card.classList.add('reveal-up');
+                card.classList.add(`reveal-delay-${index + 1}`);
+            });
+            
+            // Solution content
+            document.querySelectorAll('.solution-text').forEach(el => {
+                el.classList.add('reveal-left');
+            });
+            
+            document.querySelectorAll('.solution-image').forEach(el => {
+                el.classList.add('reveal-right');
+            });
+            
+            // Partner items
+            const partnerItems = document.querySelectorAll('.partner-item');
+            partnerItems.forEach((item, index) => {
+                item.classList.add('reveal-up');
+                item.classList.add(`reveal-delay-${index % 3 + 1}`);
+            });
+            
+            // Contact form
+            document.querySelector('.contact-form-container').classList.add('reveal-fade');
+        }
+        
+        // Add floating animation to hero section
+        function addFloatingAnimation() {
+            const heroSection = document.querySelector('.hero-content');
+            heroSection.style.animation = 'float 6s ease-in-out infinite';
+        }
+        
+        // Initial setup
+        window.addEventListener('load', () => {
+            addAnimationClasses();
+            addFloatingAnimation();
+            checkScroll();
+        });
+        
+        // Check scroll position on scroll
+        window.addEventListener('scroll', checkScroll);
+    </script>
